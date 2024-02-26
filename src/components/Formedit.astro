@@ -1,0 +1,57 @@
+---
+
+---
+
+<form action="">
+    <label for="">
+        Id:
+        <input type="number" id="id"/>
+    </label>
+    <label for="">
+        Champion:
+        <input type="text" id="name2"/>
+    </label>
+    <label for="">
+        Role:
+        <input type="text" id="role2"/>
+    </label>
+    <label for="">
+        Release Date:
+        <input type="date" id="release2"/>
+    </label>
+    <label for="">
+        Description:
+        <input type="text" id="description2"/>
+    </label>
+    <button id="editform">Edit</button>
+</form>
+
+<script>
+    document.getElementById("editform").addEventListener("click", editar)
+
+    function editar(){
+        let id = (document.getElementById("id") as HTMLInputElement).value
+        let name = (document.getElementById("name2") as HTMLInputElement).value
+        let role = (document.getElementById("role2") as HTMLInputElement).value
+        let release = (document.getElementById("release2") as HTMLInputElement).value
+        let description = (document.getElementById("description2") as HTMLInputElement).value
+
+        let data = {"name":name, "role":role, "releaseDate":release, "description":description}
+
+        try {
+            fetch(`http://localhost:3000/champions/${id}`,{
+                method:"PATCH",
+                mode:"cors",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(data)
+            })
+            window.location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+</script>

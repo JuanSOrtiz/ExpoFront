@@ -1,0 +1,52 @@
+---
+
+---
+
+<form action="">
+    <label for="">
+        Champion:
+        <input type="text" id="name"/>
+    </label>
+    <label for="">
+        Role:
+        <input type="text" id="role"/>
+    </label>
+    <label for="">
+        Release Date:
+        <input type="date" id="release"/>
+    </label>
+    <label for="">
+        Description:
+        <input type="text" id="description"/>
+    </label>
+    <button id="sendform">Submit</button>
+</form>
+
+<script>
+    document.getElementById("sendform").addEventListener("click", enviar)
+
+    function enviar(){
+        let name = (document.getElementById("name") as HTMLInputElement).value
+        let role = (document.getElementById("role") as HTMLInputElement).value
+        let release = (document.getElementById("release") as HTMLInputElement).value
+        let description = (document.getElementById("description") as HTMLInputElement).value
+
+        let data = {"name":name, "role":role, "releaseDate":release, "description":description}
+
+        try {
+            fetch(`http://localhost:3000/champions`,{
+                method:"POST",
+                mode:"cors",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(data)
+            })
+            window.location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+</script>

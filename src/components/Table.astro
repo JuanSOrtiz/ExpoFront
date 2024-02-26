@@ -1,0 +1,38 @@
+---
+import Botondelete from "./Botondelete.astro"
+
+const response = await fetch("http://localhost:3000/champions")
+const data = await response.json()
+
+---
+
+<div>
+    <h1>Champions</h1>
+</div>
+
+<div>
+    <table>
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Release Date</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            {data.map((champion)=>(
+                <tr>
+                    <td>{champion.id}</td>
+                    <td>{champion.name}</td>
+                    <td>{champion.role}</td>
+                    <td>{champion.releaseDate}</td>
+                    <td>{champion.description}</td>
+                    <td>
+                        <Botondelete id={champion.id}/>
+                    </td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
+</div>

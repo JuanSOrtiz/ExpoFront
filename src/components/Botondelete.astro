@@ -1,0 +1,34 @@
+---
+const {id} = Astro.props
+---
+
+<button class="botondelete">Delete</button>
+
+<script define:vars={{id}}>
+
+
+    function eliminarRegistro(){
+        try {
+            fetch(`http://localhost:3000/champions/${id}`,{
+                method:"DELETE",
+                mode:"cors",
+                headers:{
+                    "Content-Type":"application/json"
+                }
+            })
+            window.location.reload()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const buttons = document.querySelectorAll("button.botondelete")
+
+    buttons.forEach((button)=>{
+        button.addEventListener("click", () =>{
+            eliminarRegistro()
+        })
+    })
+
+</script>
+
